@@ -1,0 +1,6 @@
+[package]
+name = "nem-rust-mini"
+version = "0.1.0"
+authors = ["Kei NIKADO <nikado.kei@gmail.com>"]
+
+[dependencies]
