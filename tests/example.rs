@@ -1,4 +1,4 @@
-extern crate nem_rust_mini;
+extern crate nem;
 extern crate restson;
 
 #[macro_use]

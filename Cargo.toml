@@ -1,7 +1,11 @@
 [package]
-name = "nem_rust_mini"
+name = "nem"
 version = "0.1.0"
 authors = ["Kei NIKADO <nikado.kei@gmail.com>"]
+
+[lib]
+name = "nem"
+path = "src/nem/lib.rs"
 
 [dependencies]
 hyper = "^0.12.1"
