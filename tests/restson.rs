@@ -1,12 +1,11 @@
-extern crate nem;
 extern crate restson;
 
 #[macro_use]
 extern crate serde_derive;
 
-use restson::{RestClient,RestPath,Error};
+use restson::{Error, RestClient, RestPath};
 
-#[derive(Serialize,Deserialize)]
+#[derive(Serialize, Deserialize)]
 struct HttpBinAnything {
     method: String,
     url: String,
@@ -14,12 +13,16 @@ struct HttpBinAnything {
 
 // plain API call without parameters
 impl RestPath<()> for HttpBinAnything {
-    fn get_path(_: ()) -> Result<String,Error> { Ok(String::from("anything")) }
+    fn get_path(_: ()) -> Result<String, Error> {
+        Ok(String::from("anything"))
+    }
 }
 
 // API call with one u32 parameter (e.g. "http://httpbin.org/anything/1234")
 impl RestPath<u32> for HttpBinAnything {
-    fn get_path(param: u32) -> Result<String,Error> { Ok(format!("anything/{}", param)) }
+    fn get_path(param: u32) -> Result<String, Error> {
+        Ok(format!("anything/{}", param))
+    }
 }
 
 #[test]

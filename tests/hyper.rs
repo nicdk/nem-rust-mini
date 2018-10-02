@@ -1,8 +1,7 @@
 extern crate hyper;
 
-use std::io::{self,Write};
+use hyper::rt::Future;
 use hyper::Client;
-use hyper::rt::{self, Future, Stream};
 
 #[test]
 fn test_hyper_get() {
@@ -14,8 +13,7 @@ fn test_hyper_get() {
         .get(url)
         .map(|res| {
             println!("Response: {}", res.status());
-        })
-    .map_err(|err| {
-        println!("Error: {}", err);
-    });
+        }).map_err(|err| {
+            println!("Error: {}", err);
+        });
 }
