@@ -26,9 +26,7 @@ pub fn main() {
     };
 
     if args.is_present("list") {
-        let url = "http://bigalice2.nem.ninja:7890/node/peer-list/all";
-        let mut res = reqwest::get(url).unwrap();
-        res.copy_to(&mut io::stdout()).unwrap();
+        list();
     }
 }
 
@@ -47,4 +45,10 @@ fn cli() -> App {
                 .long("network")
                 .value_name("network"),
         )
+}
+
+fn list() {
+    let url = "http://bigalice2.nem.ninja:7890/node/peer-list/all";
+    let mut res = reqwest::get(url).unwrap();
+    res.copy_to(&mut io::stdout()).unwrap();
 }
