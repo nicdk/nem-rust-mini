@@ -9,7 +9,8 @@ extern crate json_pretty;
 use clap::{Arg, SubCommand};
 use json_pretty::PrettyFormatter;
 
-pub type App = clap::App<'static, 'static>;
+type App = clap::App<'static, 'static>;
+type Exitcode = u8;
 
 pub fn main() {
     println!("Hello.");
@@ -17,18 +18,26 @@ pub fn main() {
     env_logger::init();
     info!("starting up");
 
+    cli_main().unwrap();
+}
+
+fn cli_main() -> Result<(), Exitcode> {
+
     let matches = cli().get_matches_safe();
     println!("matches {:?}", matches);
     let args = match matches {
         Ok(args) => args,
-        Err(e) => {
-            panic!(e);
+        Err(_e) => {
+            return Err(255);
         }
     };
 
     if args.is_present("list") {
         list();
+        return Ok(());
     }
+
+    Ok(())
 }
 
 fn cli() -> App {
