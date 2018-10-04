@@ -1,7 +1,7 @@
 #![deny(warnings)]
-extern crate hyper;
 
 extern crate reqwest;
+
 use std::io;
 
 #[test]
