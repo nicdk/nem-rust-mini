@@ -4,9 +4,10 @@ extern crate log;
 extern crate clap;
 extern crate env_logger;
 extern crate reqwest;
+extern crate json_pretty;
 
 use clap::{Arg, SubCommand};
-use std::io;
+use json_pretty::PrettyFormatter;
 
 pub type App = clap::App<'static, 'static>;
 
@@ -50,5 +51,6 @@ fn cli() -> App {
 fn list() {
     let url = "http://bigalice2.nem.ninja:7890/node/peer-list/all";
     let mut res = reqwest::get(url).unwrap();
-    res.copy_to(&mut io::stdout()).unwrap();
+    let formatter = PrettyFormatter::from_string(&res.text().unwrap());
+    println!("{}", formatter.pretty());
 }
