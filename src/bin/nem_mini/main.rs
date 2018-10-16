@@ -6,10 +6,13 @@ extern crate env_logger;
 extern crate reqwest;
 extern crate json_pretty;
 extern crate url;
+extern crate serde;
+extern crate serde_json;
 
 use clap::{Arg, SubCommand};
 use json_pretty::PrettyFormatter;
 use url::Url;
+use serde_json::Value;
 
 type App = clap::App<'static, 'static>;
 type Exitcode = u8;
@@ -64,8 +67,11 @@ fn cli() -> App {
 fn list() {
     let url = "http://bigalice2.nem.ninja:7890/node/peer-list/all";
     let mut res = reqwest::get(url).unwrap();
-    let formatter = PrettyFormatter::from_string(&res.text().unwrap());
-    println!("{}", formatter.pretty());
+    // let formatter = PrettyFormatter::from_string(&res.text().unwrap());
+    // println!("{}", formatter.pretty());
+
+    let deserialized: Value = serde_json::from_str(&res.text().unwrap()).unwrap();
+    println!("deserialized = {:?}", deserialized);
 }
 
 fn api(s: &str) {
