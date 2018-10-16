@@ -1,4 +1,4 @@
-extern crate nem-mini;
+extern crate nem_mini;
 #[macro_use]
 extern crate log;
 extern crate clap;
